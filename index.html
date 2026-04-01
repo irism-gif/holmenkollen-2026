@@ -167,7 +167,7 @@
 </div>
 
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyb4tywFoWT4zNiajozlV_KG5kknuUwb5MAYzceQymjOPzCBSBHV0gGV49_7F2qwAQV/exec';
+  const SCRIPT_URL = "https://formspree.io/f/xzdkvvqo"; // Bytt ut med din Formspree-URL, f.eks. https://formspree.io/f/xyzabcde
 
   let selectedSize = '';
   let tshorteBehov = '';
@@ -256,12 +256,12 @@
     };
 
     try {
-      await fetch(SCRIPT_URL, {
+      const res = await fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
       });
+      if (!res.ok) throw new Error('Feil fra Formspree');
       document.getElementById('regForm').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
     } catch (err) {
